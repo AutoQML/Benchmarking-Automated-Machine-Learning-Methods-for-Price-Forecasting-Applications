@@ -1,0 +1,91 @@
+model:
+  # model_list: ['Caterpillar-D6', 'Caterpillar-966']
+  # model_list: ['Caterpillar-950', 'Caterpillar-M318']
+  # model_list: ["Caterpillar-D6"]
+  # model_list: ['Caterpillar-308', 'Caterpillar-320', 'Caterpillar-323', 'Caterpillar-329', 'Caterpillar-330', 'Caterpillar-336', 'Caterpillar-950', 'Caterpillar-966', 'Caterpillar-D6', 'Caterpillar-M318']
+  model_list: ['Caterpillar-308', 'Caterpillar-320', 'Caterpillar-323', 'Caterpillar-329', 'Caterpillar-330', 'Caterpillar-336', 'Caterpillar-950', 'Caterpillar-966', 'Caterpillar-D6', 'Caterpillar-M318', 'merged-files']
+  # model_list: ['merged-files']
+
+  Caterpillar-Default:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 
+
+  Caterpillar-308:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 
+
+  Caterpillar-320:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 
+
+  Caterpillar-323:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 
+
+  Caterpillar-329:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 450000 # set max price to 450.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000
+
+  Caterpillar-330:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 
+
+  Caterpillar-336:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 
+
+  Caterpillar-950:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 450000 # set max price to 450.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000
+
+  Caterpillar-966:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 450000 # set max price to 450.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000
+
+  Caterpillar-D6:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 
+
+  Caterpillar-M318:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000
+
+  merged-files:
+    MAX_WORKING_HOURS: 30000
+    MIN_PRICE: 1000
+    MAX_PRICE: 500000 # set max price to 500.000 €
+    SANITY_PRICE: 50000 # set sanity price = 50.000 €
+    SANITY_HOURS: 1000 # set sanity working hours to 1.000 

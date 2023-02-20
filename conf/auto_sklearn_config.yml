@@ -1,0 +1,8 @@
+params:
+
+  # Time limit in seconds for the search of appropriate models
+  time_for_task: 300
+  # Time limit for a single call to the machine learning model. 
+  # Model fitting will be terminated if the machine learning algorithm runs over the time limit. 
+  # Set this value high enough so that typical machine learning algorithms can be fit on the training data.
+  run_time_limit: 30

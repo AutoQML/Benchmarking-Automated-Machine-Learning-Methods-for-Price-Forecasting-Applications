@@ -1,0 +1,25 @@
+pca_num: 1 # max number of principal components (features)
+
+random_state: 1 # set random state
+
+bin_outlier_detect: True # set the additional outlier detection within bins (True or False)
+
+algorithms: ["classical", "nn", "autosklearn", "autogluon", "flaml", "optuna"]
+
+documentation: True # set the documentation (True or False)
+
+measurement_num: 1 # number of repetitive measurements
+
+# set preprocessing for automl methods
+automl_preprocessing: False
+
+# evaluate data set variance
+evaluate_dataset_variance: False
+
+# set method evaluation value weights
+mev_weights:
+    correctness: 50
+    expertise: 40
+    complexity: 10 
+    responsiveness: 0 
+    reproducability: 0
