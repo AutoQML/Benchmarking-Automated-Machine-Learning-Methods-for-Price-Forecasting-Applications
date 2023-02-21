@@ -869,49 +869,49 @@ def document_results_docx(const_machine_models: list,
 ###############################
 # FOR MANUAL DOCUMENT CREATION
 ###############################
-# const_machine_models = ['Caterpillar-308', 'Caterpillar-320', 'Caterpillar-323', 'Caterpillar-329', 'Caterpillar-330', 'Caterpillar-336', 'Caterpillar-950', 'Caterpillar-966', 'Caterpillar-D6', 'Caterpillar-M318']
-const_machine_models = ['merged-files']
-# const_machine_models = ['Caterpillar-950', 'Caterpillar-966']
-# const_machine_models = ['Caterpillar-323']
-# get cuttent date
-today = date.today()
-# # YY-mm-dd
-m_date = today.strftime("%Y-%m-%d")
+# # const_machine_models = ['Caterpillar-308', 'Caterpillar-320', 'Caterpillar-323', 'Caterpillar-329', 'Caterpillar-330', 'Caterpillar-336', 'Caterpillar-950', 'Caterpillar-966', 'Caterpillar-D6', 'Caterpillar-M318']
+# const_machine_models = ['merged-files']
+# # const_machine_models = ['Caterpillar-950', 'Caterpillar-966']
+# # const_machine_models = ['Caterpillar-323']
+# # get cuttent date
+# today = date.today()
+# # # YY-mm-dd
+# m_date = today.strftime("%Y-%m-%d")
 
-# DELETE after testing
-m_date = '2023-02-16'
+# # DELETE after testing
+# m_date = '2023-02-16'
 
-# create summery yaml file
-# File path within the summery directory for each measurement
-EXPLICIT_SUMMERY_FILE_PATH = Path('./measurements', 'summery', m_date)
+# # create summery yaml file
+# # File path within the summery directory for each measurement
+# EXPLICIT_SUMMERY_FILE_PATH = Path('./measurements', 'summery', m_date)
 
-filename = "{}-{}.{}".format(m_date,'summery','yml')
-GLOBAL_YAML_SUMMERY_FILE = Path(EXPLICIT_SUMMERY_FILE_PATH, filename)
+# filename = "{}-{}.{}".format(m_date,'summery','yml')
+# GLOBAL_YAML_SUMMERY_FILE = Path(EXPLICIT_SUMMERY_FILE_PATH, filename)
 
-######################################
-# LOAD CONFIGURATIONS
-######################################
-REPO_PATH = Path(__file__).parents[1]
+# ######################################
+# # LOAD CONFIGURATIONS
+# ######################################
+# REPO_PATH = Path(__file__).parents[1]
 
-# Load configuration files
-general_conf = read_yaml(REPO_PATH / 'conf/general_config.yml')
-model_conf = read_yaml(REPO_PATH / 'conf/model_config.yml')
-autosklearn_conf = read_yaml(REPO_PATH / 'conf/auto_sklearn_config.yml')
+# # Load configuration files
+# general_conf = read_yaml(REPO_PATH / 'conf/general_config.yml')
+# model_conf = read_yaml(REPO_PATH / 'conf/model_config.yml')
+# autosklearn_conf = read_yaml(REPO_PATH / 'conf/auto_sklearn_config.yml')
 
-# Create global configuration file
-CFG = dict()
-CFG["general"] = general_conf
-CFG["model"] = model_conf
-CFG["autosklearn"] = autosklearn_conf
+# # Create global configuration file
+# CFG = dict()
+# CFG["general"] = general_conf
+# CFG["model"] = model_conf
+# CFG["autosklearn"] = autosklearn_conf
 
-# CFG["general"]["start_date"] = get_current_date()
-CFG["general"]["start_date"] = m_date
+# # CFG["general"]["start_date"] = get_current_date()
+# CFG["general"]["start_date"] = m_date
 
-NUM_OF_MEASUREMENTS = 5
+# NUM_OF_MEASUREMENTS = 5
 
-# document_results_docx(const_machine_models,m_date, GLOBAL_YAML_SUMMERY_FILE, EXPLICIT_SUMMERY_FILE_PATH)
-document_results_docx(const_machine_models,
-                              NUM_OF_MEASUREMENTS = NUM_OF_MEASUREMENTS,
-                              GLOBAL_YAML_SUMMERY_FILE = GLOBAL_YAML_SUMMERY_FILE, 
-                              EXPLICIT_SUMMERY_FILE_PATH = EXPLICIT_SUMMERY_FILE_PATH, 
-                              config = CFG)
+# # document_results_docx(const_machine_models,m_date, GLOBAL_YAML_SUMMERY_FILE, EXPLICIT_SUMMERY_FILE_PATH)
+# document_results_docx(const_machine_models,
+#                               NUM_OF_MEASUREMENTS = NUM_OF_MEASUREMENTS,
+#                               GLOBAL_YAML_SUMMERY_FILE = GLOBAL_YAML_SUMMERY_FILE, 
+#                               EXPLICIT_SUMMERY_FILE_PATH = EXPLICIT_SUMMERY_FILE_PATH, 
+#                               config = CFG)
