@@ -236,7 +236,7 @@ def evaluate_and_clean_data(machine_model: str,
 
 
     # set path to CSV data files 
-    FILE_PATH_IN = Path(REPO_PATH, 'final_splunk_results', MACHINE_MODEL)
+    FILE_PATH_IN = Path(REPO_PATH, 'data')
 
     # Get all CSV files for the current construction machine model
     list_of_files = FILE_PATH_IN.glob('*.csv')
@@ -294,7 +294,7 @@ def evaluate_and_clean_data(machine_model: str,
     # DATA PREPARATION
     ######################################
 
-    machine_type = clean_dataset(df = machine_type)
+    # machine_type = clean_dataset(df = machine_type)
 
     ######################################
     # CREATE PATHS
@@ -378,13 +378,13 @@ def evaluate_and_clean_data(machine_model: str,
     ######################################
     # OUTLIER DETECTION & DELETION
     ######################################
-    if BIN_OUTLIER_DETECTION == True:
-        machine_type = remove_outliers(machine_type)
+    # if BIN_OUTLIER_DETECTION == True:
+    #     machine_type = remove_outliers(machine_type)
 
     ###################################
     # SANITY CHECK
     ###################################
-    machine_type = sanity_check(df = machine_type, machine_model = machine_model, config = config)
+    # machine_type = sanity_check(df = machine_type, machine_model = machine_model, config = config)
 
     ###################################
     # CALCULATE AND SAVE STATS OF INPUT FILE
