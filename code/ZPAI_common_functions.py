@@ -7,7 +7,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 
 # load CSV data file
 def load_csv_data(csv_path):
-    return pd.read_csv(csv_path, delimiter=';')
+    return pd.read_csv(csv_path, delimiter=',')
 
 # Define the helper function `display_scores` to print the results of the cross validation
 def display_scores(scores, f):
