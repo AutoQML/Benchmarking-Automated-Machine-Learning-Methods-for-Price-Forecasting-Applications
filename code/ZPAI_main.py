@@ -5,7 +5,7 @@ from pathlib import Path
 import os
 
 from ZPAI_common_functions import get_current_date, create_path, read_yaml
-from ZPAI_evaluate_dataset import evaluate_and_clean_data
+from ZPAI_evaluate_dataset import evaluate_data
 from ZPAI_document_results_docx import document_results_docx
 
 def create_parser():
@@ -196,7 +196,7 @@ def main():
             # get model configuration
             print('\n Construction machine model {} of {} - {}'.format(count+1, len(SELECTED_MACHINE_MODELS), machine_model))
 
-            evaluate_and_clean_data(machine_model = machine_model,
+            evaluate_data(machine_model = machine_model,
                                     measurement = measurement + 1,
                                     GLOBAL_TXT_SUMMERY_FILE = GLOBAL_TXT_SUMMERY_FILE,
                                     GLOBAL_YAML_SUMMERY_FILE = GLOBAL_YAML_SUMMERY_FILE,

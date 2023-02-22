@@ -12,118 +12,6 @@ import matplotlib.pyplot as plt
 from ZPAI_prepare_data_for_ml import prepare_data_for_ml
 from ZPAI_common_functions import load_csv_data, create_path, read_yaml
 
-def clean_dataset(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Summary
-
-    Detailed description
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Description of arg1
-    
-    Returns
-    -------
-    df : pd.DataFrame
-        Description
-
-    """
-    # Drop all NA / NAN entries
-    df = df.dropna()
-
-    # Delete unnamed column
-    if set(['Unnamed: 0']).issubset(df.columns):
-        df = df.drop('Unnamed: 0', axis=1)
-
-    # Delete currency column
-    if set(['currency']).issubset(df.columns):
-        df = df.drop('currency', axis=1)
-
-    # Delete brand column
-    if set(['brand']).issubset(df.columns):
-        df = df.drop('brand', axis=1)
-
-    # Clean extension column
-    df["extension"] = df["extension"].str.upper() # Make all uppercase letters
-    df["extension"] = df["extension"].str.strip() # Delete leading white space
-    df["extension"] = df["extension"].str.rstrip()
-    df["extension"] = df["extension"].str.replace(" ","") # Delete all spaces string
-    df["extension"] = df["extension"].str.strip()
-    df["extension"] = df["extension"].str.rstrip()
-
-    # Drop all machines older than 20 years
-    df = df.drop(df[df.const_year < 2002].index)
-
-    return df
-
-def remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Summary
-
-    Detailed description
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Description of arg1
-    
-    Returns
-    -------
-    df : pd.DataFrame
-        Description
-
-    """
-
-    mean_group_by_const_year = df.groupby('const_year')['price'].mean() # get the mean values grouped for each construction year
-    mean_group_by_const_year = mean_group_by_const_year.reset_index(level=0) # reset index = convert const_year index column to normal column
-    mean_group_by_const_year = mean_group_by_const_year.astype(int)
-
-    for index, row in mean_group_by_const_year.iterrows():
-        # delete detected outliers
-        df = df.drop(df.loc[(df['const_year'] == row["const_year"]) & 
-                           ((df['price'] - row["price"]) >= (row["price"] * 2))].index)
-
-    return df
-
-def sanity_check(df: pd.DataFrame, 
-                 machine_model: str, 
-                 config: dict) -> pd.DataFrame:
-    """
-    Summary
-
-    Detailed description
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Description of arg1
-    machine_model : str
-        Description of arg2
-    config : dict
-        Description
-    
-    Returns
-    -------
-    df : pd.DataFrame
-        Descriptio
-
-    """
-
-    MAX_WORKING_HOURS = config["model"]["model"][machine_model]["MAX_WORKING_HOURS"]
-    MIN_PRICE = config["model"]["model"][machine_model]["MIN_PRICE"]
-    MAX_PRICE = config["model"]["model"][machine_model]["MAX_PRICE"]
-    SANITY_PRICE = config["model"]["model"][machine_model]["SANITY_PRICE"]
-    SANITY_HOURS = config["model"]["model"][machine_model]["SANITY_HOURS"]
-
-    df = df.drop(df[df.working_hours == 0].index) # Delete entries (rows) with working_hours == 0.
-    df = df.drop(df[df.working_hours > MAX_WORKING_HOURS].index) # Delete entries (rows) with working_hours >= MAX_WORKING_HOURS.
-    df = df.drop(df[df.price < MIN_PRICE].index) # Delete entries (rows) with price <= MIN_PRICE
-    df = df.drop(df[(df.price < SANITY_PRICE) & (df.working_hours < SANITY_HOURS)].index) # Drop entries for which the price is below SANITY_PRICE € and working hours is below SANITY_HOURS hours.
-    df = df.drop(df[df.price > MAX_PRICE].index) # Delete entries (rows) with price > MAX_PRICE
-
-    return df
-
 def calculate_stats(df: pd.DataFrame, 
                     machine_model: str, 
                     filename: str, 
@@ -188,7 +76,7 @@ def calculate_stats(df: pd.DataFrame,
     # else:
     #     print('Statistics to model: {} already exists!'.format(machine_model))
 
-def evaluate_and_clean_data(machine_model: str,
+def evaluate_data(machine_model: str,
                             measurement: int,
                             GLOBAL_TXT_SUMMERY_FILE: str, 
                             GLOBAL_YAML_SUMMERY_FILE: str,
@@ -281,21 +169,6 @@ def evaluate_and_clean_data(machine_model: str,
                 " created: " + str(file_creation_date) + "\n")
 
 
-    # # open autosklearn conf file
-    # with open(GLOBAL_YAML_SUMMERY_FILE) as file:
-    #     data_x = yaml.safe_load(file)
-
-    # data_x['input_files'][MACHINE_MODEL] = input_filename_with_type
-
-    # with open(GLOBAL_YAML_SUMMERY_FILE, 'w') as file: # open the file in append mode
-    #     yaml.dump(data_x, file)
-
-    ######################################
-    # DATA PREPARATION
-    ######################################
-
-    # machine_type = clean_dataset(df = machine_type)
-
     ######################################
     # CREATE PATHS
     ######################################
@@ -375,20 +248,10 @@ def evaluate_and_clean_data(machine_model: str,
     plt.savefig(FILE_PATH_PICS+'/'+filename)
     plt.close()
 
-    ######################################
-    # OUTLIER DETECTION & DELETION
-    ######################################
-    # if BIN_OUTLIER_DETECTION == True:
-    #     machine_type = remove_outliers(machine_type)
-
-    ###################################
-    # SANITY CHECK
-    ###################################
-    # machine_type = sanity_check(df = machine_type, machine_model = machine_model, config = config)
-
     ###################################
     # CALCULATE AND SAVE STATS OF INPUT FILE
     ###################################
+
     calculate_stats(df = machine_type, 
                     machine_model = MACHINE_MODEL,
                     filename = input_filename_with_type,  
