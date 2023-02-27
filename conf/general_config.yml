@@ -23,3 +23,8 @@ mev_weights:
     complexity: 10 
     responsiveness: 0 
     reproducability: 0
+
+# set knowledge levels
+knowledge_levels:
+    manual_methods: 5
+    automl_methods: 2

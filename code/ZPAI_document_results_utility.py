@@ -719,6 +719,8 @@ def calculate_mev_values(mape_result_df,training_duration_df, testing_duration_d
     COMPLEXITY_FACTOR = config["general"]["mev_weights"]["complexity"]
     EXPERTISE_FACTOR = config["general"]["mev_weights"]["expertise"]
     RESPONSIVENESS_FACTOR = config["general"]["mev_weights"]["responsiveness"]
+    K_LEVEL_MANUEL = config["general"]["knowledge_levels"]["manual_methods"]
+    K_LEVEL_AUTOML = config["general"]["knowledge_levels"]["automl_methods"]
 
     SUM_WEIGHTING_VALUES = CORRECTNESS_FACTOR + COMPLEXITY_FACTOR + EXPERTISE_FACTOR + RESPONSIVENESS_FACTOR
 
@@ -736,10 +738,18 @@ def calculate_mev_values(mape_result_df,training_duration_df, testing_duration_d
     # print(extension_location_df)
 
     # 3. add knowledge levels
-    basic_subset_df['K-level'] = [5,5,2,2,2]
-    extension_df['K-level'] = [5,5,2,2,2]
-    location_df['K-level'] = [5,5,2,2,2]
-    extension_location_df['K-level'] = [5,5,2,2,2]
+    row_names = list(basic_subset_df.index.values)
+    k_levels = []
+    for i,  val in enumerate(row_names):
+        if val == 'classic' or val == 'nn':
+            k_levels.append(K_LEVEL_MANUEL)
+        elif val == 'autosklearn' or val == 'autogluon' or val == 'flaml':
+            k_levels.append(K_LEVEL_AUTOML)
+
+    basic_subset_df['K-level'] = k_levels
+    extension_df['K-level'] = k_levels
+    location_df['K-level'] = k_levels
+    extension_location_df['K-level'] = k_levels
     # print(extension_location_df)
 
     # 4. normalize the MAPE values
