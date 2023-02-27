@@ -46,6 +46,7 @@ Requirements for the AutoGluon environment:
 - pandas, matplotlib, seaborn, numpy, yaml, python-docx 
 
 ## Usage
+The framework is implemented, tested and utilized on **Ubuntu Linux**. A small test implementation is available for MacOS.  
 
 Execute
 
@@ -56,7 +57,7 @@ to run the framework.
 
 ### Arguments
 
-The execution can be controled via the following arguments, which can be modified within the control.sh file
+The execution can be controled via the following arguments, which can be modified within the control.sh file.
 
 - **algorithms**: define the methods that should be executed
 - **measurements**: set the number of repetitions
