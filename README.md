@@ -22,7 +22,7 @@ The following **AutoML methods** are integrated:
 
 
 <p align="center">
-    <img src="./assets/fig_framework.pdf"  width=400>
+    <img src="./assets/fig_framework.png"  width=400>
     <br>
 </p>
 
