@@ -28,27 +28,22 @@ The following **AutoML methods** are integrated:
 
 The grafical overview illustrates the steps of the data processing phase in green, which are not part of the framework, and the ML phase in yellow. One-hot encoding and standard scaling are only applied to the manually implemented ML methods.
 
-## Installation on Linux
+## Requirements
 
-Conda is used to create two separate environments for autosklear/FLAML and AutoGluon.
+**Two separate conda environments** for auto-sklear/FLAML and AutoGluon are needed.
 
-### Conda
+Requirements for the auto-sklearn & FLAML environment:
 
-Install conda on Linux by following this [user guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html).
+- python
+- auto-sklearn
+- FLAML
+- pandas, matplotlib, seaborn, numpy, yaml, python-docx
 
-### Conda environments
+Requirements for the AutoGluon environment:
 
-Create the auto-sklearn / FLAML and the AutoGluon environments by executing
-
-
-```bash
-conda env create -f autosklearn-environment.yml
-```
-and
-
-```bash
-conda env create -f autogluon-environment.yml
-```
+- python
+- AutoGluon
+- pandas, matplotlib, seaborn, numpy, yaml, python-docx 
 
 ## Usage
 
