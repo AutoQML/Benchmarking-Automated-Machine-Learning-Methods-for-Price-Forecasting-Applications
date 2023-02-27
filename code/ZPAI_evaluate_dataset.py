@@ -167,7 +167,10 @@ def evaluate_data(machine_model: str,
                 MACHINE_MODEL + ": " + input_filename_with_type + 
                 " with size: " + str(len(machine_type)) + 
                 " created: " + str(file_creation_date) + "\n")
-
+        
+    # Delete unnamed / index column
+    if set(['Unnamed: 0']).issubset(machine_type.columns):
+        machine_type = machine_type.drop('Unnamed: 0', axis=1)
 
     ######################################
     # CREATE PATHS
