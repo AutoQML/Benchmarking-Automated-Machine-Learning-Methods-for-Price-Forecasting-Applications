@@ -241,18 +241,6 @@ def prepare_data_for_ml(machine_model: str,
         # # create result data frame
         flaml_result_df = pd.DataFrame(index=flaml_index)
 
-    if "optuna" in ALGORITHMS:
-        # create result data frame to store the measurements for autosklearn
-        optuna_index = ['CV - LinReg - Mean MAE', 'CV - LinReg - Mean RMSE', 'CV - LinReg - Mean R2Score',
-                        'CV - Tree - Mean MAE', 'CV - Tree - Mean RMSE', 'CV - Tree - Mean R2Score',
-                        'CV - RandForest - Mean MAE', 'CV - RandForest - Mean RMSE', 'CV - RandForest - Mean R2Score',
-                        'CV - SVR - Mean MAE', 'CV - SVR - Mean RMSE', 'CV - SVR - Mean R2Score',
-                        'CV - KNN - Mean MAE', 'CV - KNN - Mean RMSE', 'CV - KNN - Mean R2Score',
-                        'CV - AdaBoost - Mean MAE', 'CV - AdaBoost - Mean RMSE', 'CV - AdaBoost - Mean R2Score',
-                        'final-model', 'Test-MAE', 'Test-MAPE', 'Test-RMSE', 'Test-N-RMSE', 'Test-IQR-RMSE', 'Test-CV-RMSE', 'Test-R2', 'Training-Duration', 'Test-Duration']
-        # # create result data frame
-        optuna_result_df = pd.DataFrame(index=optuna_index)
-
     ###########################
     # Data preparation
     ###########################
@@ -366,7 +354,7 @@ def prepare_data_for_ml(machine_model: str,
 
             if "nn" in ALGORITHMS:
                 if PYTHON_ENV == 'automl-autosklearn':
-                    # evaluate NN
+                    # evaluate MLP
                     from ZPAI_evaluate_neural_nets import evaluate_neural_nets
                     evaluate_neural_nets(X_train = df_dataset_X_train,
                                         y_train = df_dataset_y_train,
@@ -402,24 +390,6 @@ def prepare_data_for_ml(machine_model: str,
                                             measurements = MEASUREMENTS)
                     if MY_OS == 'Darwin':
                         print("System OS: ",MY_OS)
-                else:
-                    print('Wrong python environment!')
-
-            if "optuna" in ALGORITHMS:
-                if PYTHON_ENV == 'automl-autosklearn':
-                    # evaluate NN
-                    from ZPAI_evaluate_classic_ml_models_optuna import eval_classic_ml_models_optuna
-                    eval_classic_ml_models_optuna(X_train = df_dataset_X_train,
-                                        y_train = df_dataset_y_train,
-                                        X_test = df_dataset_X_test,
-                                        y_test = df_dataset_y_test,
-                                        summery_file = SUMMERY_FILE,
-                                        column_count = column_count,
-                                        input_filename = input_filename,
-                                        file_path_pics = FILE_PATH_PICS,
-                                        result_df = optuna_result_df,
-                                        feature_set = feature_set,
-                                        config = config)
                 else:
                     print('Wrong python environment!')
 
@@ -473,12 +443,6 @@ def prepare_data_for_ml(machine_model: str,
         filename = "{}-{}-{}.{}".format(M_DATE, input_filename, 'nn-results','csv')
         RESULT_CSV = Path(FILE_PATH_DATA, filename)
         nn_result_df.to_csv(RESULT_CSV)
-
-    if "optuna" in ALGORITHMS:
-        # store NN results within the results.csv
-        filename = "{}-{}-{}.{}".format(M_DATE, input_filename, 'optuna-results','csv')
-        RESULT_CSV = Path(FILE_PATH_DATA, filename)
-        optuna_result_df.to_csv(RESULT_CSV)
 
     if "autosklearn" in ALGORITHMS:
         # store autosklearn results within the results.csv

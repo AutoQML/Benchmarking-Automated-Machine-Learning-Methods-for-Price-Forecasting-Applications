@@ -11,7 +11,7 @@ from ZPAI_document_results_docx import document_results_docx
 def create_parser():
     parser = argparse.ArgumentParser(description="Process inputs")
     parser.add_argument("--pca", type = int, help = "Number of selected PCA components")
-    parser.add_argument("--algorithms", choices = ["classical", "nn", "autosklearn", "autogluon", "flaml", "optuna"], nargs="*", help = "Type of algorithms to run.")
+    parser.add_argument("--algorithms", choices = ["classical", "nn", "autosklearn", "autogluon", "flaml"], nargs="*", help = "Type of algorithms to run.")
     parser.add_argument("--models", choices = ['308', '320', '323', '329', '330', '336', '950', '966', 'D6', 'M318', 'merged', 'all'], nargs="*", help = "Selected models list")
     parser.add_argument("--outlier_detection", choices = ["True", "False"], help = "Remove outliers from dataset")
     parser.add_argument("--document_results", choices = ["True", "False"], help = "Document the results")

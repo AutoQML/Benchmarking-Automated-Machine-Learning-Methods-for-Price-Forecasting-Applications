@@ -94,8 +94,6 @@ def evaluate_autosklearn(X_train: pd.DataFrame,
     automl = AutoSklearnRegressor(time_left_for_this_task = TIME_FOR_TASK, 
                                   per_run_time_limit=RUN_TIME_LIMIT,
                                   # metric = error_rate,
-                                #   smac_scenario_args={'runcount_limit': 20},
-                                #   initial_configurations_via_metalearning = 19,
                                   metric = autosklearn.metrics.mean_absolute_error,
                                   tmp_folder = tmp_folder_x, 
                                   memory_limit = None,
@@ -166,14 +164,7 @@ def evaluate_autosklearn(X_train: pd.DataFrame,
     ###################
     # Calculate metric scores
     mean_abs_error, mean_abs_percentage_error, r2_score_value, RMSE = calculate_scores(y_test, final_predictions)
-    # # Calculate MAE and MEPE according to https://scikit-learn.org/stable/modules/model_evaluation.html#mean-absolute-percentage-error
-    # mean_abs_error = mean_absolute_error(y_test, final_predictions)
-    # mean_abs_percentage_error = mean_absolute_percentage_error(y_test, final_predictions)
-    # r2_score_value = r2_score(y_test, final_predictions) 
-
-    # # calculate RMSE value and its derivative according to https://en.wikipedia.org/wiki/Root-mean-square_deviation#Normalization
-    # # RMSE
-    # RMSE = np.sqrt(mean_squared_error(y_test, final_predictions))
+    
     # Normalized MRSE
     Y_MAX = y_test.max()
     Y_MIN = y_test.min()

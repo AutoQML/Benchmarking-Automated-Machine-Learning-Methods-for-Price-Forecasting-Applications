@@ -112,7 +112,6 @@ def evaluate_data(machine_model: str,
     
 
     # Get parameters from configuration file
-    BIN_OUTLIER_DETECTION = config["general"]["bin_outlier_detect"]
     M_DATE = config["general"]["start_date"]
     REPO_PATH = config["general"]["repo_path"]
     EVAL_DATASET_VARIANCE = config["general"]["evaluate_dataset_variance"]

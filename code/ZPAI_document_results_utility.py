@@ -93,7 +93,7 @@ def add_results_heading(document, heading, heading_level):
     heading_2 = heading
     document.add_heading(heading_2, level=heading_level)
 
-def get_results_values(score, classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results):
+def get_results_values(score, classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results):
     score_result_df = pd.DataFrame()
     
     # Extract value for neural nets.
@@ -127,12 +127,6 @@ def get_results_values(score, classic_results, nn_results, autosklearn_results, 
         flaml_score_results = flaml_results.loc[ f'Test-{score}' , : ]
         score_result_df = pd.concat([score_result_df, pd.DataFrame.from_records([flaml_score_results])])
         score_result_df = score_result_df.rename(index={0: 'flaml'})
-
-    # Extract value for optuna method.
-    if not optuna_results.empty:
-        optuna_score_results = optuna_results.loc[ f'Test-{score}' , : ]
-        score_result_df = pd.concat([score_result_df, pd.DataFrame.from_records([optuna_score_results])])
-        score_result_df = score_result_df.rename(index={0: 'optuna'})
 
     score_result_df = score_result_df.astype(float)
 
@@ -509,7 +503,7 @@ def add_summary_table(document, best_result_df, summery_result_values, table_fon
                         font = run.font
                         font.size= Pt(table_font_size)
 
-def get_duration_results_values(score, classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results):
+def get_duration_results_values(score, classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results):
     score_result_df = pd.DataFrame()
     
     # Extract value for neural nets.
@@ -543,12 +537,6 @@ def get_duration_results_values(score, classic_results, nn_results, autosklearn_
         flaml_score_results = flaml_results.loc[ f'{score}' , : ]
         score_result_df = pd.concat([score_result_df, pd.DataFrame.from_records([flaml_score_results])])
         score_result_df = score_result_df.rename(index={0: 'flaml'})
-
-    # Extract value for optuna method.
-    if not optuna_results.empty:
-        optuna_score_results = optuna_results.loc[ f'{score}' , : ]
-        score_result_df = pd.concat([score_result_df, pd.DataFrame.from_records([optuna_score_results])])
-        score_result_df = score_result_df.rename(index={0: 'optuna'})
 
     score_result_df = score_result_df.astype(float)
 
@@ -654,7 +642,6 @@ def add_box_plot2(document, score_result_df, column_name, score, measurement_dat
     labels = [label.replace('2', 'Rand. Forest') for label in labels]
     labels = [label.replace('3', 'FLAML') for label in labels]
     labels = [label.replace('4', 'Neural Net') for label in labels]
-    labels = [label.replace('5', 'Optuna') for label in labels]
 
     ax.set_xticklabels(labels)
 

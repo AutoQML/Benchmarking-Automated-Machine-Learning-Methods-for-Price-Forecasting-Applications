@@ -112,12 +112,6 @@ def plot_dataset_performance(values: np.ndarray, labels: list, datasets: list, C
 
     plt.close()
 
-# plot_dataset_performance(
-#     np.array([nn, classic, optuna, autosklearn, autogluon, flaml]),
-#     ['nn', 'classic', 'otuna', 'autosklearn', 'autogluon', 'flaml'],
-#     ['basic', 'extension', 'XE', 'location', 'extension-XE', 'extension-location', 'XE-location', 'extension-XE-location']
-# )
-
 def plot_feature_performance(score_result_df, score, CHART_PATH, CHART_PDF_PATH, max_value, min_value, const_machine_model, document, picture_size):
     max_value =  max_value
     min_value = min_value

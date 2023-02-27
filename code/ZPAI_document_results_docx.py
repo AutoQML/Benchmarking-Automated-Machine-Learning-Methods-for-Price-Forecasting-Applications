@@ -82,7 +82,6 @@ def document_results_docx(const_machine_models: list,
         autosklearn_result_filename = "{}-{}-{}-{}-{}.{}".format(MEASUREMENT_DATE, const_machine_model,'final',INPUT_FILE_CREATION_DATE,'autosklearn-results', 'csv')
         autogluon_result_filename = "{}-{}-{}-{}-{}.{}".format(MEASUREMENT_DATE, const_machine_model,'final',INPUT_FILE_CREATION_DATE,'autogluon-results', 'csv')
         flaml_result_filename = "{}-{}-{}-{}-{}.{}".format(MEASUREMENT_DATE, const_machine_model,'final',INPUT_FILE_CREATION_DATE,'flaml-results', 'csv')
-        optuna_result_filename = "{}-{}-{}-{}-{}.{}".format(MEASUREMENT_DATE, const_machine_model,'final',INPUT_FILE_CREATION_DATE,'optuna-results', 'csv')
 
         # init data frames
         nn_results = pd.DataFrame()
@@ -90,7 +89,6 @@ def document_results_docx(const_machine_models: list,
         autosklearn_results = pd.DataFrame()
         autogluon_results = pd.DataFrame()
         flaml_results = pd.DataFrame()
-        optuna_results = pd.DataFrame()
 
         # create result data frame
         r2_result_df = pd.DataFrame()
@@ -144,21 +142,16 @@ def document_results_docx(const_machine_models: list,
             if FLAML_FILE_PATH.is_file():
                 flaml_results = load_csv_data(FLAML_FILE_PATH)
 
-            # get optuna results
-            OPTUNA_FILE_PATH = Path(REPO_PATH, 'measurements', const_machine_model, 'data', SUB_DIR_DATA, str(measurement + 1), optuna_result_filename)
-            if OPTUNA_FILE_PATH.is_file():
-                optuna_results = load_csv_data(OPTUNA_FILE_PATH)
-
             # get the result values
-            temp_r2_result_df = get_results_values("R2", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_mae_result_df = get_results_values("MAE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_mape_result_df = get_results_values("MAPE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_rmse_result_df = get_results_values("RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_nrmse_result_df = get_results_values("N-RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_iqrrmse_result_df = get_results_values("IQR-RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_cvrmse_result_df = get_results_values("CV-RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_training_duration_result_df = get_duration_results_values("Training-Duration", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
-            temp_testing_duration_result_df = get_duration_results_values("Test-Duration", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
+            temp_r2_result_df = get_results_values("R2", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_mae_result_df = get_results_values("MAE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_mape_result_df = get_results_values("MAPE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_rmse_result_df = get_results_values("RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_nrmse_result_df = get_results_values("N-RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_iqrrmse_result_df = get_results_values("IQR-RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_cvrmse_result_df = get_results_values("CV-RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_training_duration_result_df = get_duration_results_values("Training-Duration", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
+            temp_testing_duration_result_df = get_duration_results_values("Test-Duration", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
 
 
             # init the dataframe for the first time
@@ -230,7 +223,7 @@ def document_results_docx(const_machine_models: list,
         ################################
 
         add_results_heading(document, f"R2 results for {const_machine_model}", HEADING_2_LEVELS)
-        # r2_result_df = get_results_values("R2", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
+        # r2_result_df = get_results_values("R2", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
         add_score_table(document, r2_result_df, "R2", TABLE_FONT_SIZE)
         add_bar_plot(document, r2_result_df, "R2", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
         # add_line_plot(document, r2_result_df, "R2", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
@@ -241,7 +234,7 @@ def document_results_docx(const_machine_models: list,
         #######################
 
         add_results_heading(document, f"MAE results for {const_machine_model}", HEADING_2_LEVELS)
-        # mae_result_df = get_results_values("MAE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
+        # mae_result_df = get_results_values("MAE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
         add_score_table(document, mae_result_df, "MAE", TABLE_FONT_SIZE)
         add_bar_plot(document, mae_result_df, "MAE", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
         # add_line_plot(document, mae_result_df, "MAE", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
@@ -251,7 +244,7 @@ def document_results_docx(const_machine_models: list,
         # Display MAPE results
         #######################
         add_results_heading(document, f"MAPE results for {const_machine_model}", HEADING_2_LEVELS)
-        # mape_result_df = get_results_values("MAPE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
+        # mape_result_df = get_results_values("MAPE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
         add_score_table(document, mape_result_df, "MAPE", TABLE_FONT_SIZE)
         add_bar_plot(document, mape_result_df, "MAPE", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
         # add_line_plot(document, mape_result_df, "MAPE", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
@@ -284,7 +277,7 @@ def document_results_docx(const_machine_models: list,
         #######################
 
         add_results_heading(document, f"RMSE results for {const_machine_model}", HEADING_2_LEVELS)
-        # rmse_result_df = get_results_values("RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results, optuna_results)
+        # rmse_result_df = get_results_values("RMSE", classic_results, nn_results, autosklearn_results, autogluon_results, flaml_results)
         add_score_table(document, rmse_result_df, "RMSE", TABLE_FONT_SIZE)
         add_bar_plot(document, rmse_result_df, "RMSE", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
         # add_line_plot(document, rmse_result_df, "RMSE", MEASUREMENT_DATE, INPUT_FILE_CREATION_DATE, const_machine_model, REPO_PATH, PICTURE_SIZE)
@@ -747,8 +740,6 @@ def document_results_docx(const_machine_models: list,
         #     best_result_picture_file = "{}-{}-{}-{}-{}-{}.{}".format(MEASUREMENT_DATE, const_machine_model,'final',INPUT_FILE_CREATION_DATE,'classic-test-result',rmse_location, 'png')
         # elif rmse_method == 'flaml':
         #     best_result_picture_file = "{}-{}-{}-{}-{}-{}.{}".format(MEASUREMENT_DATE, const_machine_model,'final',INPUT_FILE_CREATION_DATE,'flaml-test-result',rmse_location, 'png')
-        # elif rmse_method == 'optuna':
-        #     best_result_picture_file = "{}-{}-{}-{}-{}-{}.{}".format(MEASUREMENT_DATE, const_machine_model,'final',INPUT_FILE_CREATION_DATE,'optuna-test-result',rmse_location, 'png')
         # else:
         #     print('Failure in displaying the best result')
 

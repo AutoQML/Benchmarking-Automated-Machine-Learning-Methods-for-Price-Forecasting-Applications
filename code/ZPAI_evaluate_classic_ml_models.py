@@ -550,12 +550,6 @@ def eval_classic_ml_models(X_train: pd.DataFrame,
     f.write('Evaluate the system on the test set\n')
     f.write('-----------------------------------\n\n')
 
-    # # Do the final test with the test set with the best estimator!
-    # machine_type_X_test = X_test_preprep.drop('price', axis = 1)
-    # y_test = X_test_preprep['price'].copy()
-
-    # X_test = full_pipeline.transform(machine_type_X_test)
-
     # Test start time
     test_start_time = time()
 
@@ -591,14 +585,7 @@ def eval_classic_ml_models(X_train: pd.DataFrame,
     ###################
     # Calculate metric scores
     mean_abs_error, mean_abs_percentage_error, r2_score_value, RMSE = calculate_scores(y_test, final_predictions)
-    # # Calculate MAE and MEPE according to https://scikit-learn.org/stable/modules/model_evaluation.html#mean-absolute-percentage-error
-    # mean_abs_error = mean_absolute_error(y_test, final_predictions)
-    # mean_abs_percentage_error = mean_absolute_percentage_error(y_test, final_predictions)
-    # r2_score_value = r2_score(y_test, final_predictions)
-
-    # # calculate RMSE value and its derivative according to https://en.wikipedia.org/wiki/Root-mean-square_deviation#Normalization
-    # # RMSE
-    # RMSE = np.sqrt(mean_squared_error(y_test, final_predictions))
+    
     # Normalized MRSE
     Y_MAX = y_test.max()
     Y_MIN = y_test.min()
