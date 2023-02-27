@@ -8,7 +8,7 @@ algorithms: ["classical", "nn", "autosklearn", "autogluon", "flaml", "optuna"]
 
 documentation: True # set the documentation (True or False)
 
-measurement_num: 1 # number of repetitive measurements
+measurement_num: 5 # number of repetitive measurements
 
 # set preprocessing for automl methods
 automl_preprocessing: False
