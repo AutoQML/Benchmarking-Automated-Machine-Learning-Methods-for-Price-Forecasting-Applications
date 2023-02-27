@@ -132,6 +132,11 @@ def main():
     # INITIALIZE COMMON SUMMARY
     ######################################
 
+    # File path for measurements
+    MEASUREMENT_FILE_PATH = Path(REPO_PATH, 'measurements')
+    if not Path.exists(MEASUREMENT_FILE_PATH):
+        create_path(path = MEASUREMENT_FILE_PATH, verbose = False)
+
     # File path for the common summary
     SUMMERY_FILE_PATH = Path(REPO_PATH, 'measurements', 'summery')
     if not Path.exists(SUMMERY_FILE_PATH):
