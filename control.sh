@@ -56,7 +56,7 @@ then
 
     if [ $CONDA_DEFAULT_ENV == "automl-autogluon" ]
     then
-        python codeZPAI_main.py --start_date $START_DATE --algorithms autogluon --models merged --measurements 5 --document_results True
+        python code/ZPAI_main.py --start_date $START_DATE --algorithms autogluon --models merged --measurements 5 --document_results True
     fi
 
     conda deactivate
